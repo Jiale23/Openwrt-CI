@@ -50,6 +50,7 @@ jobs:
 
       - name: Compile firmware
         run: |
+          cd openwrt
           make -j$(nproc) || make -j1 V=s
           echo "======================="
           echo "Space usage:"
@@ -62,6 +63,7 @@ jobs:
 
       - name: Prepare artifact
         run: |
+          cd openwrt
           mkdir -p ./artifact/package
           mkdir -p ./artifact/buildinfo
           rm -rf $(find ./bin/targets/ -type d -name "packages")
@@ -72,16 +74,16 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: OpenWrt_buildinfo
-          path: ./artifact/buildinfo/
+          path: ./openwrt/artifact/buildinfo/
 
       - name: Upload package
         uses: actions/upload-artifact@v4
         with:
           name: OpenWrt_package
-          path: ./artifact/package/
+          path: ./openwrt/artifact/package/
 
       - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
           name: OpenWrt_firmware
-          path: ./bin/targets/
+          path: ./openwrt/bin/targets/
