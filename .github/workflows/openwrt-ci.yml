@@ -16,6 +16,8 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@master
       - name: Space cleanup and Initialization environment
         env:
           DEBIAN_FRONTEND: noninteractive
