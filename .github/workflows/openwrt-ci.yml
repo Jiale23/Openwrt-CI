@@ -41,7 +41,8 @@ jobs:
       - name: Generate configuration file
         run: |
           cd openwrt
-          make defconfig
+          cat $GITHUB_WORKSPACE/Config/Cudy_Tr3000.txt $GITHUB_WORKSPACE/Config/General.txt >> .config
+          make defconfig -j$(nproc)
 
       - name: Download packages
         run: |
