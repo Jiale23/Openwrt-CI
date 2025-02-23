@@ -54,10 +54,10 @@ UPDATE_PACKAGE() {
 # UPDATE_PACKAGE "包名" "项目地址" "项目分支" "pkg/name，可选，pkg为从大杂烩中单独提取包名插件；name为重命名为包名"
 UPDATE_PACKAGE "argon" "sbwml/luci-theme-argon" "openwrt-24.10"
 
-UPDATE_PACKAGE "passwall" "xiaorouji/openwrt-passwall" "main" "pkg"
+# UPDATE_PACKAGE "passwall" "xiaorouji/openwrt-passwall" "main" "pkg"
 
-UPDATE_PACKAGE "luci-app-passwall2" "xiaorouji/openwrt-passwall2"
-UPDATE_PACKAGE "openwrt-passwall-packages" "xiaorouji/openwrt-passwall-packages"
+# UPDATE_PACKAGE "luci-app-passwall2" "xiaorouji/openwrt-passwall2"
+# UPDATE_PACKAGE "openwrt-passwall-packages" "xiaorouji/openwrt-passwall-package"
 UPDATE_PACKAGE "luci-app-adguardhome" "rufengsuixing/luci-app-adguardhome"
 UPDATE_PACKAGE "luci-app-unblockneteasemusic" "UnblockNeteaseMusic/luci-app-unblockneteasemusic" 
 UPDATE_PACKAGE "luci-app-ddns-go" "sirpdboy/luci-app-ddns-go"

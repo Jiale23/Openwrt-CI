@@ -40,6 +40,11 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
+      - name: Custom Packages
+        run: |
+          cd openwrt/package
+            
+          $GITHUB_WORKSPACE/Scripts/Packages.sh
       - name: Generate configuration file
         run: |
           cd openwrt
