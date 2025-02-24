@@ -26,7 +26,7 @@ jobs:
         SOURCE: [openwrt/openwrt]
         BRANCH: [openwrt-24.10]
 
-    uses: ./.github/workflows/WRT-build.yml
+    uses: ./.github/workflows/openwrt-ci.yml
     with:
       #编译配置
       WRT_CONFIG: ${{matrix.CONFIG}}

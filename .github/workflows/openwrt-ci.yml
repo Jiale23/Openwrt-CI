@@ -4,6 +4,44 @@ on:
   schedule:
     - cron: 0 20 * * *
   workflow_dispatch: 
+  workflow_call:
+    inputs:
+      WRT_CONFIG:
+        required: true
+        type: string
+      WRT_THEME:
+        required: true
+        type: string
+      WRT_NAME:
+        required: true
+        type: string
+      WRT_SSID:
+        required: true
+        type: string
+      WRT_WORD:
+        required: true
+        type: string
+      WRT_IP:
+        required: true
+        type: string
+      WRT_PW:
+        required: true
+        type: string
+      WRT_REPO:
+        required: true
+        type: string
+      WRT_BRANCH:
+        required: true
+        type: string
+      WRT_SOURCE:
+        required: false
+        type: string
+      WRT_PACKAGE:
+        required: false
+        type: string
+      WRT_TEST:
+        required: false
+        type: string
 
 permissions: write-all
 
