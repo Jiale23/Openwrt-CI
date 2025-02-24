@@ -55,18 +55,16 @@ UPDATE_PACKAGE() {
 
 # UPDATE_PACKAGE "passwall" "xiaorouji/openwrt-passwall" "main" "pkg"
 
+UPDATE_PACKAGE "luci-theme-argon" "sbwml/luci-theme-argon" "openwrt-24.10"
+UPDATE_PACKAGE "luci-app-argon-config" "jerrykuku/luci-app-argon-config" "master"
+
 UPDATE_PACKAGE "luci-app-passwall2" "xiaorouji/openwrt-passwall2" "main"
 UPDATE_PACKAGE "openwrt-passwall-packages" "xiaorouji/openwrt-passwall-packages" "main"
-UPDATE_PACKAGE "argon" "sbwml/luci-theme-argon" "openwrt-24.10"
 UPDATE_PACKAGE "luci-app-adguardhome" "rufengsuixing/luci-app-adguardhome" "master"
 UPDATE_PACKAGE "luci-app-ddns-go" "sirpdboy/luci-app-ddns-go" "main"
 UPDATE_PACKAGE "luci-app-poweroffdevice" "sirpdboy/luci-app-poweroffdevice" "main"
 UPDATE_PACKAGE "luci-app-autoreboot" "f8q8/luci-app-autoreboot" "master"
 UPDATE_PACKAGE "luci-app-zerotier" "zhengmz/luci-app-zerotier" "master"
-
-if [[ $WRT_REPO != *"immortalwrt"* ]]; then
-	UPDATE_PACKAGE "qmi-wwan" "immortalwrt/wwan-packages" "master" "pkg"
-fi
 
 #更新软件包版本
 UPDATE_VERSION() {
@@ -103,5 +101,5 @@ UPDATE_VERSION() {
 }
 
 #UPDATE_VERSION "软件包名" "测试版，true，可选，默认为否"
-UPDATE_VERSION "sing-box"
-UPDATE_VERSION "tailscale"
+# UPDATE_VERSION "sing-box"
+# UPDATE_VERSION "tailscale"
