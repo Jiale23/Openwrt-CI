@@ -88,7 +88,7 @@ jobs:
 
       - name: Clone Repo #克隆仓库
         run: |
-          git clone --single-branch --branch $WRT_BRANCH https://github.com/$WRT_REPO.git
+          git clone --single-branch --branch $WRT_BRANCH $WRT_REPO
 
       - name: Update feeds
         run: |
@@ -118,7 +118,7 @@ jobs:
       - name: Compile firmware
         run: |
           cd openwrt
-          
+
           make -j$(nproc) || make -j1 V=s
           echo "======================="
           echo "Space usage:"
