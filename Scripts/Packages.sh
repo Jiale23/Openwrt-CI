@@ -52,19 +52,17 @@ UPDATE_PACKAGE() {
 # UPDATE_PACKAGE "open-app-filter" "destan19/OpenAppFilter" "master" "" "luci-app-appfilter oaf" 这样会把原有的open-app-filter，luci-app-appfilter，oaf相关组件删除，不会出现coremark错误。
 
 # UPDATE_PACKAGE "包名" "项目地址" "项目分支" "pkg/name，可选，pkg为从大杂烩中单独提取包名插件；name为重命名为包名"
-UPDATE_PACKAGE "argon" "sbwml/luci-theme-argon" "openwrt-24.10"
 
 # UPDATE_PACKAGE "passwall" "xiaorouji/openwrt-passwall" "main" "pkg"
 
-# UPDATE_PACKAGE "luci-app-passwall2" "xiaorouji/openwrt-passwall2"
-# UPDATE_PACKAGE "openwrt-passwall-packages" "xiaorouji/openwrt-passwall-package"
-UPDATE_PACKAGE "luci-app-adguardhome" "rufengsuixing/luci-app-adguardhome"
-UPDATE_PACKAGE "luci-app-unblockneteasemusic" "UnblockNeteaseMusic/luci-app-unblockneteasemusic" 
-UPDATE_PACKAGE "luci-app-ddns-go" "sirpdboy/luci-app-ddns-go"
-UPDATE_PACKAGE "luci-app-poweroffdevice" "sirpdboy/luci-app-poweroffdevice"
-UPDATE_PACKAGE "luci-app-autoreboot" "f8q8/luci-app-autoreboot"
-UPDATE_PACKAGE "luci-app-arpbind" "monokoo/luci-app-arpbind"
-UPDATE_PACKAGE "luci-app-zerotier" "zhengmz/luci-app-zerotier"
+UPDATE_PACKAGE "luci-app-passwall2" "xiaorouji/openwrt-passwall2" "main"
+UPDATE_PACKAGE "openwrt-passwall-packages" "xiaorouji/openwrt-passwall-package" "main"
+UPDATE_PACKAGE "argon" "sbwml/luci-theme-argon" "openwrt-24.10"
+UPDATE_PACKAGE "luci-app-adguardhome" "rufengsuixing/luci-app-adguardhome" "master"
+UPDATE_PACKAGE "luci-app-ddns-go" "sirpdboy/luci-app-ddns-go" "main"
+UPDATE_PACKAGE "luci-app-poweroffdevice" "sirpdboy/luci-app-poweroffdevice" "main"
+UPDATE_PACKAGE "luci-app-autoreboot" "f8q8/luci-app-autoreboot" "master"
+UPDATE_PACKAGE "luci-app-zerotier" "zhengmz/luci-app-zerotier" "master"
 
 if [[ $WRT_REPO != *"immortalwrt"* ]]; then
 	UPDATE_PACKAGE "qmi-wwan" "immortalwrt/wwan-packages" "master" "pkg"
