@@ -99,7 +99,10 @@ jobs:
           ./scripts/feeds install -a
 
       - name: Custom Packages
-        run: |
+        run: | #临时方案
+          rm openwrt/target/linux/mediatek/dts/mt7981b-cudy-tr3000-max-v1.dts
+          cp -r $GITHUB_WORKSPACE/dts/* openwrt/target/linux/mediatek/dts/
+          
           cd openwrt/package
           
           $GITHUB_WORKSPACE/Scripts/Packages.sh
