@@ -3,6 +3,8 @@ name: WRT-ALL
 
 #CI计划
 on:
+  schedule:
+    - cron: 0 20 * * *
   #手动编译
   workflow_dispatch:
     # inputs:

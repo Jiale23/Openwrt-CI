@@ -1,8 +1,6 @@
 name: OpenWrt-CI
 
 on:
-  schedule:
-    - cron: 0 20 * * *
   workflow_dispatch: 
   workflow_call:
     inputs:
@@ -86,9 +84,13 @@ jobs:
           sudo chmod +x $GITHUB_WORKSPACE/Scripts/Packages.sh
           sudo chmod +x $GITHUB_WORKSPACE/Scripts/Settings.sh
 
+          sudo mkdir -p /mnt/build_wrt
+          sudo chown $USER:$USER /mnt/build_wrt
+          sudo ln -s /mnt/build_wrt $GITHUB_WORKSPACE/openwrt
+
       - name: Clone Repo #克隆仓库
         run: |
-          git clone --single-branch --branch $WRT_BRANCH $WRT_REPO
+          git clone --single-branch --branch $WRT_BRANCH $WRT_REPO ./openwrt/
 
       - name: Update feeds
         run: |
