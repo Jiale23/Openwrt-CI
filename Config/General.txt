@@ -1,3 +1,4 @@
+CONFIG_DEFAULT_dnsmasq=y
 CONFIG_PACKAGE_dnsmasq=n
 CONFIG_PACKAGE_dnsmasq-full=y
 CONFIG_PACKAGE_dnsmasq_full_dhcp=y
