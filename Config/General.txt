@@ -39,12 +39,12 @@ CONFIG_PACKAGE_luci-mod-network=y
 CONFIG_PACKAGE_luci-mod-status=y
 CONFIG_PACKAGE_luci-mod-system=y
 #工具
-CONFIG_PACKAGE_openssh-sftp-server=y
+CONFIG_PACKAGE_init-settings=y
+CONFIG_PACKAGE_bash=y
 CONFIG_PACKAGE_vsftpd=y
 CONFIG_PACKAGE_vim-full=y
-CONFIG_PACKAGE_bash=y
 CONFIG_PACKAGE_block-mount=y
-CONFIG_PACKAGE_init-settings=y
+CONFIG_PACKAGE_openssh-sftp-server=y
 #自定义软件包
 CONFIG_PACKAGE_luci-app-adguardhome=y
 CONFIG_PACKAGE_luci-app-autoreboot=y
