@@ -107,7 +107,7 @@ jobs:
           
           $GITHUB_WORKSPACE/Scripts/Packages.sh
           cp -r $GITHUB_WORKSPACE/package/jiale ./
-          ls 
+          ls jiale
       - name: Generate configuration file
         run: |
           cd openwrt
