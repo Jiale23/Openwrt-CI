@@ -83,6 +83,7 @@ jobs:
 
           sudo chmod +x $GITHUB_WORKSPACE/Scripts/Packages.sh
           sudo chmod +x $GITHUB_WORKSPACE/Scripts/Settings.sh
+          sudo chmod +x $GITHUB_WORKSPACE/package/jiale/files/init_script
 
           sudo mkdir -p /mnt/build_wrt
           sudo chown $USER:$USER /mnt/build_wrt
@@ -106,6 +107,8 @@ jobs:
           cd openwrt/package
           
           $GITHUB_WORKSPACE/Scripts/Packages.sh
+          cp -r $GITHUB_WORKSPACE/package/jiale ./
+          ls 
       - name: Generate configuration file
         run: |
           cd openwrt
