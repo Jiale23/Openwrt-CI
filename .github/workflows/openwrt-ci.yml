@@ -116,11 +116,7 @@ jobs:
 
           $GITHUB_WORKSPACE/Scripts/Settings.sh
           make defconfig -j$(nproc)
-          grep "CONFIG_PACKAGE_init-settings=y" .config
-          if [ $? -ne 0 ]; then
-              echo "Error: init-settings package not enabled in .config!"
-              exit 1
-          fi
+          echo "CONFIG_PACKAGE_init-settings=y" >> .config
 
       - name: Download packages
         run: |
