@@ -43,7 +43,7 @@ CONFIG_PACKAGE_openssh-sftp-server=y
 CONFIG_PACKAGE_vsftpd=y
 CONFIG_PACKAGE_vim-full=y
 CONFIG_PACKAGE_bash=y
-PACKAGE_block-mount=y
+CONFIG_PACKAGE_block-mount=y
 #自定义软件包
 CONFIG_PACKAGE_luci-app-adguardhome=y
 CONFIG_PACKAGE_luci-app-autoreboot=y
