@@ -83,7 +83,7 @@ jobs:
 
           sudo chmod +x $GITHUB_WORKSPACE/Scripts/Packages.sh
           sudo chmod +x $GITHUB_WORKSPACE/Scripts/Settings.sh
-          sudo chmod +x $GITHUB_WORKSPACE/package/jiale/files/init_script
+          sudo chmod +x $GITHUB_WORKSPACE/package/jiale/init_settings/files/init_script
 
           sudo mkdir -p /mnt/build_wrt
           sudo chown $USER:$USER /mnt/build_wrt
