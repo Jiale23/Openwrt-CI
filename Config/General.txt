@@ -44,7 +44,10 @@ CONFIG_PACKAGE_vsftpd=y
 CONFIG_PACKAGE_vim-full=y
 CONFIG_PACKAGE_bash=y
 CONFIG_PACKAGE_block-mount=y
+<<<<<<< HEAD
 CONFIG_PACKAGE_init-settings
+=======
+>>>>>>> 3ebeb20815ba699f60b2796de8ace201680d19ad
 #自定义软件包
 CONFIG_PACKAGE_luci-app-adguardhome=y
 CONFIG_PACKAGE_luci-app-autoreboot=y
