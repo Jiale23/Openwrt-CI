@@ -106,12 +106,13 @@ jobs:
           cd openwrt/package
           
           $GITHUB_WORKSPACE/Scripts/Packages.sh
+          cd ..
           curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
+          cp -r $GITHUB_WORKSPACE/files ./
       - name: Generate configuration file
         run: |
           cd openwrt
 
-          cp -r $GITHUB_WORKSPACE/files ./
           cat $GITHUB_WORKSPACE/Config/Cudy_Tr3000.txt $GITHUB_WORKSPACE/Config/General.txt >> .config
 
           $GITHUB_WORKSPACE/Scripts/Settings.sh
