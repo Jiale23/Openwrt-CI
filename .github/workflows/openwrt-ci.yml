@@ -106,17 +106,16 @@ jobs:
           cd openwrt/package
           
           $GITHUB_WORKSPACE/Scripts/Packages.sh
-          cp -r $GITHUB_WORKSPACE/package/jiale ./
-          ls jiale
+          curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
       - name: Generate configuration file
         run: |
           cd openwrt
 
+          cp -r $GITHUB_WORKSPACE/files ./
           cat $GITHUB_WORKSPACE/Config/Cudy_Tr3000.txt $GITHUB_WORKSPACE/Config/General.txt >> .config
 
           $GITHUB_WORKSPACE/Scripts/Settings.sh
           make defconfig -j$(nproc)
-          echo "CONFIG_PACKAGE_init-settings=y" >> .config
 
       - name: Download packages
         run: |

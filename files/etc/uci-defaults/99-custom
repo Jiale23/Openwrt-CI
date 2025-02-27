@@ -1,0 +1,2 @@
+uci -q set wireless.@wifi-device[0].disabled='1'
+uci -q set wireless.@wifi-iface[0].ssid='OpenWrt0815'
