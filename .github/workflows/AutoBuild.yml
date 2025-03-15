@@ -3,7 +3,7 @@ name: AutoBuild
 
 #CI计划
 on:
-  #自动编译：当Auto-Clean运行完成后
+  #自动编译：当AutoClean运行完成后
   workflow_run:
     workflows: ["AutoClean"]
     types:
