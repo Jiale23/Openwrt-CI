@@ -1,11 +1,11 @@
 #CI项目
-name: WRT-ALL
+name: AutoBuild
 
 #CI计划
 on:
   #自动编译：当Auto-Clean运行完成后
   workflow_run:
-    workflows: ["Auto-Clean"]
+    workflows: ["AutoClean"]
     types:
       - completed
   #手动编译
