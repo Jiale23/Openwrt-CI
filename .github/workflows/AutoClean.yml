@@ -1,4 +1,4 @@
-name: Auto-Clean
+name: AutoClean
 
 on:
   #自动清理：每天早上6点
