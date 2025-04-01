@@ -1,9 +1,0 @@
-#!/bin/sh
-
-# 设置无线参数
-uci set wireless.radio1.htmode='HE160'
-uci set wireless.radio1.channel='auto'
-
-# 提交更改并重启无线服务
-uci commit wireless
-wifi reload
