@@ -115,7 +115,7 @@ jobs:
         run: |
           cd openwrt
 
-          cat $GITHUB_WORKSPACE/Config/Cudy_Tr3000.txt $GITHUB_WORKSPACE/Config/General.txt >> .config
+          cat $GITHUB_WORKSPACE/Config/$WRT_CONFIG.txt $GITHUB_WORKSPACE/Config/General.txt >> .config
 
           $GITHUB_WORKSPACE/Scripts/Settings.sh
           make defconfig -j$(nproc)
