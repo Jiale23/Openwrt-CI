@@ -1,20 +1,35 @@
 #CI项目
-name: AutoBuild
+name: TestBuild
 
 #CI计划
 on:
-  #自动编译：当AutoClean运行完成后
-  workflow_run:
-    workflows: ["AutoClean"]
-    types:
-      - completed
   #手动编译
   workflow_dispatch:
-    # inputs:
-    #   PACKAGE:
-    #     description: '手动调整插件包，多个请用\n符号隔开。'
-    #     required: false
-    #     type: string
+    inputs:
+      CONFIG:
+        default: 'Cudy_Tr3000'
+        required: true
+        type: choice
+        options:
+          - Cudy_Tr3000
+      SOURCE:
+        default: 'openwrt/openwrt'
+        required: true
+        type: choice
+        options:
+          - openwrt/openwrt
+      BRANCH:
+        default: 'develop'
+        required: true
+        type: string
+      PACKAGE:
+        required: false
+        type: string
+      TEST:
+        description: '仅输出配置文件，不编译固件。'
+        default: true
+        required: true
+        type: boolean
 
 #CI权限
 permissions: write-all
@@ -26,7 +41,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        CONFIG: [X86_64] #Cudy_Tr3000,
+        CONFIG: [Cudy_Tr3000]
         SOURCE: [openwrt/openwrt]
         BRANCH: [openwrt-24.10]
 
@@ -46,11 +61,13 @@ jobs:
       WRT_BRANCH: ${{matrix.BRANCH}}
       #源码名称
       WRT_SOURCE: ${{matrix.SOURCE}}
-      # #插件调整
-      # WRT_PACKAGE: ${{inputs.PACKAGE}}
-      #默认密码，仅作提示，修改无用
+      #插件调整
+      WRT_PACKAGE: ${{inputs.PACKAGE}}
+      #默认密码，修改无用
       WRT_PW: 无
       #默认WIFI名称
       WRT_SSID: Openwrt
       #默认WIFI密码
       WRT_WORD: 12345678
+      #测试参数
+      WRT_TEST: ${{inputs.TEST}}
