@@ -130,6 +130,8 @@ jobs:
 
       - name: Patch OpenWrt golang package to 1.24 #保证v2ray的正常编译
         run: |
+          cd openwrt
+          
           sed -i 's/GO_VERSION_MAJOR_MINOR:=1.23/GO_VERSION_MAJOR_MINOR:=1.24/' feeds/packages/lang/golang/Makefile
           sed -i 's/GO_VERSION_PATCH:=.*/GO_VERSION_PATCH:=0/' feeds/packages/lang/golang/Makefile
 
