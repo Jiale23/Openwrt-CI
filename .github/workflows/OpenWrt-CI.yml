@@ -128,13 +128,13 @@ jobs:
           $GITHUB_WORKSPACE/Scripts/Settings.sh
           make defconfig -j$(nproc)
 
-      - name: Patch Golang to 1.24.0
+      - name: Fix golang Makefile hash for go1.24.0
         run: |
           cd openwrt
           sed -i 's/GO_VERSION_MAJOR_MINOR:=1.23/GO_VERSION_MAJOR_MINOR:=1.24/' feeds/packages/lang/golang/golang/Makefile
           sed -i 's/GO_VERSION_PATCH:=.*/GO_VERSION_PATCH:=0/' feeds/packages/lang/golang/golang/Makefile
           sed -i 's|PKG_SOURCE_URL:=.*|PKG_SOURCE_URL:=https://go.dev/dl/|' feeds/packages/lang/golang/golang/Makefile
-          sed -i 's|PKG_HASH:=.*|PKG_HASH:=b9b6bb09fdbd64a7a55ed5ce8fbd57c2e7e39fa70dcd96d7abdef44f1dcad9f0|' feeds/packages/lang/golang/golang/Makefile
+          sed -i 's|PKG_HASH:=.*|PKG_HASH:=d14120614acb29d12bcab72bd689f257eb4be9e0b6f88a8fb7e41ac65f8556e5|' feeds/packages/lang/golang/golang/Makefile
 
       - name: Download packages
         run: |
