@@ -133,8 +133,8 @@ jobs:
           cd openwrt
           ls feeds/packages/lang/golang
 
-          sed -i 's/GO_VERSION_MAJOR_MINOR:=1.23/GO_VERSION_MAJOR_MINOR:=1.24/' feeds/packages/lang/golang/Makefile
-          sed -i 's/GO_VERSION_PATCH:=.*/GO_VERSION_PATCH:=0/' feeds/packages/lang/golang/Makefile
+          sed -i 's/GO_VERSION_MAJOR_MINOR:=1.23/GO_VERSION_MAJOR_MINOR:=1.24/' feeds/packages/lang/golang/golang/Makefile
+          sed -i 's/GO_VERSION_PATCH:=.*/GO_VERSION_PATCH:=0/' feeds/packages/lang/golang/golang/Makefile
 
       - name: Download packages
         run: |
