@@ -128,13 +128,13 @@ jobs:
           $GITHUB_WORKSPACE/Scripts/Settings.sh
           make defconfig -j$(nproc)
 
-      - name: Patch OpenWrt golang package to 1.24 #保证v2ray的正常编译
+      - name: Patch Golang to 1.24.0
         run: |
           cd openwrt
-          ls feeds/packages/lang/golang
-
           sed -i 's/GO_VERSION_MAJOR_MINOR:=1.23/GO_VERSION_MAJOR_MINOR:=1.24/' feeds/packages/lang/golang/golang/Makefile
           sed -i 's/GO_VERSION_PATCH:=.*/GO_VERSION_PATCH:=0/' feeds/packages/lang/golang/golang/Makefile
+          sed -i 's|PKG_SOURCE_URL:=.*|PKG_SOURCE_URL:=https://go.dev/dl/|' feeds/packages/lang/golang/golang/Makefile
+          sed -i 's|PKG_HASH:=.*|PKG_HASH:=b9b6bb09fdbd64a7a55ed5ce8fbd57c2e7e39fa70dcd96d7abdef44f1dcad9f0|' feeds/packages/lang/golang/golang/Makefile
 
       - name: Download packages
         run: |
