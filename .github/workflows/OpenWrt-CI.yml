@@ -91,6 +91,14 @@ jobs:
       - name: Clone Repo #克隆仓库
         run: |
           git clone --single-branch --branch $WRT_BRANCH $WRT_REPO ./openwrt/
+      
+      - name: Setup Go 1.24
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24.1'  # 指定 Go 1.24.x 版本 :contentReference[oaicite:1]{index=1}
+
+      - name: Show Go version
+        run: go version
 
       - name: Update feeds
         run: |
@@ -119,6 +127,11 @@ jobs:
 
           $GITHUB_WORKSPACE/Scripts/Settings.sh
           make defconfig -j$(nproc)
+
+      - name: Patch OpenWrt golang package to 1.24 #保证v2ray的正常编译
+        run: |
+          sed -i 's/GO_VERSION_MAJOR_MINOR:=1.23/GO_VERSION_MAJOR_MINOR:=1.24/' feeds/packages/lang/golang/Makefile
+          sed -i 's/GO_VERSION_PATCH:=.*/GO_VERSION_PATCH:=0/' feeds/packages/lang/golang/Makefile
 
       - name: Download packages
         run: |
