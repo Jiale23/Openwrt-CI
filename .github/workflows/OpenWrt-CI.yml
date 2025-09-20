@@ -127,17 +127,29 @@ jobs:
           cd openwrt
           make download -j16
 
-      - name: Patch rust bootstrap
+      - name: Patch Rust bootstrap to avoid CI LLVM download
         run: |
           cd openwrt
-          mkdir -p build_dir/target-x86_64_musl/host/rustc-1.89.0-src
-          cat > build_dir/target-x86_64_musl/host/rustc-1.89.0-src/config.toml <<EOF
+
+          # 找到 Rust bootstrap 源码目录
+          RUST_SRC_DIR=$(find build_dir/target-* -type d -name 'rustc-*' -print -quit)
+          if [ -z "$RUST_SRC_DIR" ]; then
+            echo "Error: Rust source directory not found!"
+            exit 1
+          fi
+
+          echo "Patching Rust bootstrap in $RUST_SRC_DIR"
+
+          # 创建 config.toml 覆盖默认值
+          cat > "$RUST_SRC_DIR/config.toml" <<EOF
           [build]
           ci-llvm = false
           llvm.download-ci-llvm = "if-unchanged"
           EOF
 
+          echo "config.toml created successfully."
 
+          cat $RUST_SRC_DIR/config.toml
 
       - name: Compile firmware
         run: |
