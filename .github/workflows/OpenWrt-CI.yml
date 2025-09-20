@@ -113,18 +113,12 @@ jobs:
           sed -i "s/__SSID__/$WRT_SSID/g" ./files/etc/uci-defaults/99-custom
           sed -i "s/__PASSWORD__/$WRT_WORD/g" ./files/etc/uci-defaults/99-custom
       
-      - name: Patch rust bootstrap
-        run: |
-          cd openwrt
-          sed -i 's/llvm.download-ci-llvm = true/llvm.download-ci-llvm = "if-unchanged"/' \
-            feeds/packages/lang/rust/bootstrap.mk || true
-
       - name: Generate configuration file
         run: |
           cd openwrt
-
+          
           cat $GITHUB_WORKSPACE/Config/$WRT_CONFIG.txt $GITHUB_WORKSPACE/Config/General.txt >> .config
-
+          
           $GITHUB_WORKSPACE/Scripts/Settings.sh
           make defconfig -j$(nproc)
           
@@ -133,6 +127,12 @@ jobs:
           cd openwrt
           make download -j16
 
+      - name: Patch rust bootstrap
+        run: |
+          cd openwrt
+          sed -i 's/llvm.download-ci-llvm = true/llvm.download-ci-llvm = "if-unchanged"/' \
+            feeds/packages/lang/rust/bootstrap.mk || true
+          
       - name: Compile firmware
         run: |
           cd openwrt
