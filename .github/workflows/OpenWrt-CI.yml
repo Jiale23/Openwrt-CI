@@ -112,6 +112,12 @@ jobs:
           cp -r $GITHUB_WORKSPACE/files ./
           sed -i "s/__SSID__/$WRT_SSID/g" ./files/etc/uci-defaults/99-custom
           sed -i "s/__PASSWORD__/$WRT_WORD/g" ./files/etc/uci-defaults/99-custom
+      
+      - name: Patch rust bootstrap
+        run: |
+          sed -i 's/llvm.download-ci-llvm = true/llvm.download-ci-llvm = "if-unchanged"/' \
+            feeds/packages/lang/rust/bootstrap.mk || true
+
       - name: Generate configuration file
         run: |
           cd openwrt
