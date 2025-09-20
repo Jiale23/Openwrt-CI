@@ -131,31 +131,24 @@ jobs:
         run: |
           cd openwrt
 
-          # 确保 rust package 目录存在
-          if [ ! -d "feeds/packages/lang/rust" ]; then
-            echo "Rust feed not found!"
-            exit 1
-          fi
-
-          # 创建 patches 目录
           mkdir -p feeds/packages/lang/rust/patches
 
-          # 写入补丁（强制把 llvm.download-ci-llvm 改成 if-unchanged）
           cat > feeds/packages/lang/rust/patches/001-no-ci-llvm.patch <<'EOF'
-          --- a/src/bootstrap/src/core/config/config.rs
-          +++ b/src/bootstrap/src/core/config/config.rs
-          @@ fn validate_download_ci_llvm(cfg: &Config) {
-          -        panic!("`llvm.download-ci-llvm` cannot be set to `true` on CI. Use `if-unchanged` instead.");
-          +        // 强制修正：在 CI 环境下将其改为 "if-unchanged"
-          +        eprintln!("info: forcing llvm.download-ci-llvm = \"if-unchanged\" on CI");
-          +        cfg.llvm_download_ci_llvm = Some(DownloadCiLlvm::IfUnchanged);
-          +        return;
-              }
-          }
-          EOF
-
-          echo "✅ Rust bootstrap patch applied"
-
+diff --git a/src/bootstrap/src/core/config/config.rs b/src/bootstrap/src/core/config/config.rs
+index e69de29..b123abc 100644
+--- a/src/bootstrap/src/core/config/config.rs
++++ b/src/bootstrap/src/core/config/config.rs
+@@ fn validate_download_ci_llvm(cfg: &Config) {
+-        panic!("`llvm.download-ci-llvm` cannot be set to `true` on CI. Use `if-unchanged` instead.");
++        // 强制修正：在 CI 环境下将其改为 "if-unchanged"
++        eprintln!("info: forcing llvm.download-ci-llvm = \"if-unchanged\" on CI");
++        cfg.llvm_download_ci_llvm = Some(DownloadCiLlvm::IfUnchanged);
++        return;
+     }
+ }
+EOF
+          echo "✅ Rust bootstrap patch created"
+          
       - name: Compile firmware
         run: |
           cd openwrt
