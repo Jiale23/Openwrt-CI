@@ -130,12 +130,14 @@ jobs:
       - name: Patch rust bootstrap
         run: |
           cd openwrt
-          BOOTSTRAP_FILE=$(find feeds/packages -name bootstrap.mk | grep rust | head -n1)
-          if [ -n "$BOOTSTRAP_FILE" ]; then
-            sed -i 's/llvm.download-ci-llvm = true/llvm.download-ci-llvm = "if-unchanged"/' "$BOOTSTRAP_FILE"
-          else
-            echo "Rust bootstrap.mk not found, skipping patch"
-          fi
+          mkdir -p build_dir/target-x86_64_musl/host/rustc-1.89.0-src
+          cat > build_dir/target-x86_64_musl/host/rustc-1.89.0-src/config.toml <<EOF
+          [build]
+          ci-llvm = false
+          llvm.download-ci-llvm = "if-unchanged"
+          EOF
+
+
 
       - name: Compile firmware
         run: |
