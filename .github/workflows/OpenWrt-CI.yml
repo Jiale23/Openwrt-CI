@@ -126,6 +126,13 @@ jobs:
         run: |
           cd openwrt
           make download -j16
+      
+      - name: Fetch Rust host source
+        run: |
+          cd openwrt
+          # 先初始化 Rust host 目录
+          make package/feeds/packages/rust/host/prepare
+
 
       - name: Patch Rust bootstrap to avoid CI LLVM download
         run: |
