@@ -115,6 +115,7 @@ jobs:
       
       - name: Patch rust bootstrap
         run: |
+          cd openwrt
           sed -i 's/llvm.download-ci-llvm = true/llvm.download-ci-llvm = "if-unchanged"/' \
             feeds/packages/lang/rust/bootstrap.mk || true
 
