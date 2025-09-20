@@ -80,17 +80,29 @@ jobs:
           sudo -E apt -y autoremove --purge
           sudo -E apt clean
           sudo -E timedatectl set-timezone "Asia/Shanghai"
-
+          
           sudo chmod +x $GITHUB_WORKSPACE/Scripts/Packages.sh
           sudo chmod +x $GITHUB_WORKSPACE/Scripts/Settings.sh
-
+          
           sudo mkdir -p /mnt/build_wrt
           sudo chown $USER:$USER /mnt/build_wrt
           sudo ln -s /mnt/build_wrt $GITHUB_WORKSPACE/openwrt
-
-      - name: Clone Repo #克隆仓库
-        run: |
+          
+          - name: Clone Repo #克隆仓库
+          run: |
           git clone --single-branch --branch $WRT_BRANCH $WRT_REPO ./openwrt/
+          
+      - name: Patch Rust bootstrap for CI
+        run: |
+          cd openwrt
+
+          mkdir -p feeds/packages/lang/rust/patches
+
+          cp $GITHUB_WORKSPACE/Patch/001-no-ci-llvm.patch feeds/packages/lang/rust/patches/
+
+          echo "✅ Rust bootstrap patch created"
+
+          cat feeds/packages/lang/rust/patches/001-no-ci-llvm.patch
 
       - name: Update feeds
         run: |
@@ -126,18 +138,6 @@ jobs:
         run: |
           cd openwrt
           make download -j16
-      
-      - name: Patch Rust bootstrap for CI
-        run: |
-          cd openwrt
-
-          mkdir -p feeds/packages/lang/rust/patches
-
-          cp $GITHUB_WORKSPACE/Patch/001-no-ci-llvm.patch feeds/packages/lang/rust/patches/
-
-          echo "✅ Rust bootstrap patch created"
-
-          cat feeds/packages/lang/rust/patches/001-no-ci-llvm.patch
           
       - name: Compile firmware
         run: |
