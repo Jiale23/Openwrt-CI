@@ -133,7 +133,7 @@ jobs:
 
           mkdir -p feeds/packages/lang/rust/patches
 
-          cp ../../Patch/001-no-ci-llvm.patch feeds/packages/lang/rust/patches/
+          cp $GITHUB_WORKSPACE/Patch/001-no-ci-llvm.patch feeds/packages/lang/rust/patches/
 
           echo "✅ Rust bootstrap patch created"
 
