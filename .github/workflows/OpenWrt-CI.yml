@@ -127,36 +127,34 @@ jobs:
           cd openwrt
           make download -j16
       
-      - name: Fetch Rust host source
-        run: |
-          cd openwrt
-          # 先初始化 Rust host 目录
-          make package/feeds/packages/rust/host/prepare
-
-
-      - name: Patch Rust bootstrap to avoid CI LLVM download
+      - name: Patch Rust bootstrap for CI
         run: |
           cd openwrt
 
-          # 找到 Rust bootstrap 源码目录
-          RUST_SRC_DIR=$(find build_dir/target-* -type d -name 'rustc-*' -print -quit)
-          if [ -z "$RUST_SRC_DIR" ]; then
-            echo "Error: Rust source directory not found!"
+          # 确保 rust package 目录存在
+          if [ ! -d "feeds/packages/lang/rust" ]; then
+            echo "Rust feed not found!"
             exit 1
           fi
 
-          echo "Patching Rust bootstrap in $RUST_SRC_DIR"
+          # 创建 patches 目录
+          mkdir -p feeds/packages/lang/rust/patches
 
-          # 创建 config.toml 覆盖默认值
-          cat > "$RUST_SRC_DIR/config.toml" <<EOF
-          [build]
-          ci-llvm = false
-          llvm.download-ci-llvm = "if-unchanged"
+          # 写入补丁（强制把 llvm.download-ci-llvm 改成 if-unchanged）
+          cat > feeds/packages/lang/rust/patches/001-no-ci-llvm.patch <<'EOF'
+          --- a/src/bootstrap/src/core/config/config.rs
+          +++ b/src/bootstrap/src/core/config/config.rs
+          @@ fn validate_download_ci_llvm(cfg: &Config) {
+          -        panic!("`llvm.download-ci-llvm` cannot be set to `true` on CI. Use `if-unchanged` instead.");
+          +        // 强制修正：在 CI 环境下将其改为 "if-unchanged"
+          +        eprintln!("info: forcing llvm.download-ci-llvm = \"if-unchanged\" on CI");
+          +        cfg.llvm_download_ci_llvm = Some(DownloadCiLlvm::IfUnchanged);
+          +        return;
+              }
+          }
           EOF
 
-          echo "config.toml created successfully."
-
-          cat $RUST_SRC_DIR/config.toml
+          echo "✅ Rust bootstrap patch applied"
 
       - name: Compile firmware
         run: |
