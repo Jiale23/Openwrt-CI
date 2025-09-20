@@ -99,7 +99,8 @@ jobs:
           ./scripts/feeds install -a
 
       - name: Custom Packages
-        run: | #临时方案
+        run: | #临时方案 更换大分区DTS
+
           rm openwrt/target/linux/mediatek/dts/mt7981b-cudy-tr3000-v1.dts
           cp -r $GITHUB_WORKSPACE/dts/* openwrt/target/linux/mediatek/dts/
 
