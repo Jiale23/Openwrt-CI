@@ -27,7 +27,7 @@ jobs:
       fail-fast: false
       matrix:
         CONFIG: [X86_64] #Cudy_Tr3000,
-        SOURCE: [immortalwrt/immortalwrt]
+        SOURCE: [openwrt/openwrt]
         BRANCH: [openwrt-24.10]
 
     uses: ./.github/workflows/OpenWrt-CI.yml

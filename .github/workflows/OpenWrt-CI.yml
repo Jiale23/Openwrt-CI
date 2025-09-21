@@ -126,6 +126,13 @@ jobs:
         run: |
           cd openwrt
           make download -j16
+      
+      - name: Patch Rust bootstrap for CI
+        run: |
+          cd openwrt
+          
+          # ✅ 修复 rust 构建报错
+          sed -i 's/--set=llvm.download-ci-llvm=true/--set=llvm.download-ci-llvm=if-unchanged/g' feeds/packages/lang/rust/Makefile
           
       - name: Compile firmware
         run: |
