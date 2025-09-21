@@ -130,9 +130,9 @@ jobs:
       - name: Patch Rust bootstrap for CI
         run: |
           cd openwrt
-          
+
           # ✅ 修复 rust 构建报错
-          sed -i 's/--set=llvm.download-ci-llvm=true/--set=llvm.download-ci-llvm=if-unchanged/g' feeds/packages/lang/rust/Makefile
+          sed -i 's/--set=llvm.download-ci-llvm=true/--set=llvm.download-ci-llvm=false --set=llvm.use-system-llvm=true/g' feeds/packages/lang/rust/Makefile
           
       - name: Compile firmware
         run: |
