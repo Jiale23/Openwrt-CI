@@ -10,11 +10,11 @@ on:
       - completed
   #手动编译
   workflow_dispatch:
-    # inputs:
-    #   PACKAGE:
-    #     description: '手动调整插件包，多个请用\n符号隔开。'
-    #     required: false
-    #     type: string
+    inputs:
+      PACKAGE:
+        description: '手动调整插件包，多个请用\n符号隔开。'
+        required: false
+        type: string
 
 #CI权限
 permissions: write-all

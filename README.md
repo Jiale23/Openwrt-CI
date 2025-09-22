@@ -1,7 +1,7 @@
 # OpenWrt 固件持续集成 (CI/CD) 构建系统
 个人自用
 
-[![构建状态](https://img.shields.io/github/actions/workflow/status/Jiale23/Openwrt-CI/build-openwrt.yml?branch=main&label=构建状态)](https://github.com/Jiale23/Openwrt-CI/actions)
+[![构建状态](https://img.shields.io/github/actions/workflow/status/Jiale23/Openwrt-CI/AutoBuild.yml?branch=main&label=构建状态)](https://github.com/Jiale23/Openwrt-CI/actions)
 [![GitHub 最后提交](https://img.shields.io/github/last-commit/Jiale23/Openwrt-CI?label=最后更新)](https://github.com/Jiale23/Openwrt-CI/commits/main)
 
 ## 📌 简介
