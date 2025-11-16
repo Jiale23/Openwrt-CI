@@ -26,7 +26,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        CONFIG: [X86_64] #Cudy_Tr3000,
+        CONFIG: [X86_64,Cudy_Tr3000] #
         SOURCE: [openwrt/openwrt]
         BRANCH: [openwrt-24.10]
 
