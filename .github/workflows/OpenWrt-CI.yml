@@ -151,26 +151,25 @@ jobs:
       - name: Prepare artifact
         run: |
           cd openwrt
-          mkdir -p ./artifact/package
-          mkdir -p ./artifact/buildinfo
+          mkdir -p ./artifact/package ./artifact/buildinfo
           rm -rf $(find ./bin/targets/ -type d -name "packages")
           cp -rf $(find ./bin/packages/ -type f -name "*.ipk") ./artifact/package/
-          cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
+          cp -rf $(find ./bin/targets/ -type f \( -name "*.buildinfo" -o -name "*.manifest" \)) ./artifact/buildinfo/
 
       - name: Upload buildinfo
         uses: actions/upload-artifact@v4
         with:
-          name: OpenWrt_buildinfo
+          name: ${{ inputs.WRT_CONFIG }}_OpenWrt_buildinfo
           path: ./openwrt/artifact/buildinfo/
 
       - name: Upload package
         uses: actions/upload-artifact@v4
         with:
-          name: OpenWrt_package
+          name: ${{ inputs.WRT_CONFIG }}_OpenWrt_package
           path: ./openwrt/artifact/package/
 
       - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
-          name: OpenWrt_firmware
+          name: ${{ inputs.WRT_CONFIG }}_OpenWrt_firmware
           path: ./openwrt/bin/targets/
