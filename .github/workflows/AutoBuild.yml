@@ -26,9 +26,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        CONFIG: [X86_64,Cudy_Tr3000] #
-        SOURCE: [openwrt/openwrt]
-        BRANCH: [openwrt-24.10]
+        CONFIG: [X86_64,MediaTek] #编译配置文件列表
+        SOURCE: [immortalwrt/immortalwrt] #
+        BRANCH: [openwrt-25.12] #25.12分支
 
     uses: ./.github/workflows/OpenWrt-CI.yml
     with:
@@ -37,7 +37,7 @@ jobs:
       #默认主题
       WRT_THEME: argon
       #默认主机名
-      WRT_NAME: Openwrt
+      WRT_NAME: OpenWrt
       #默认地址
       WRT_IP: 192.168.31.1
       #源码链接
@@ -48,8 +48,8 @@ jobs:
       WRT_SOURCE: ${{matrix.SOURCE}}
       # #插件调整
       # WRT_PACKAGE: ${{inputs.PACKAGE}}
-      #默认密码，仅作提示，修改无用
-      WRT_PW: 无
+      #默认root密码
+      WRT_PW: ""
       #默认WIFI名称
       WRT_SSID: Openwrt
       #默认WIFI密码

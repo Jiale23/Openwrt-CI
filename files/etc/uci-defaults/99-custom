@@ -1,3 +1,14 @@
+# log potential errors
+exec >/tmp/setup.log 2>&1
+
+root_password="__ROOT_PASSWORD__" # 替换为实际的 root 密码
+
+if [ -n "$root_password" ]; then
+  (echo "$root_password"; sleep 1; echo "$root_password") | passwd > /dev/null
+fi
+
+
+# Set up WiFi
 # 启用 2.4GHz WiFi (WiFi0)
 uci -q set wireless.@wifi-device[0].disabled='0'          # 启用第一个无线设备（2.4GHz）
 uci -q set wireless.@wifi-device[0].htmode='HE40'         # 设置频宽为 40MHz（WiFi6）
@@ -27,3 +38,5 @@ uci -q set wireless.@wifi-iface[1].mode='ap'              # 设置为接入点�
 uci -q set wireless.@wifi-iface[1].ssid='__SSID___5GHz'  # 设置 5GHz SSID
 uci -q set wireless.@wifi-iface[1].encryption='psk2'      # 设置加密方式为 WPA2-PSK
 uci -q set wireless.@wifi-iface[1].key='__PASSWORD__' # 设置 5GHz 密码
+
+echo "All done!"

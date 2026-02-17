@@ -110,8 +110,11 @@ jobs:
           cd ..
           curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
           cp -r $GITHUB_WORKSPACE/files ./
+          
+          #变量注入
           sed -i "s/__SSID__/$WRT_SSID/g" ./files/etc/uci-defaults/99-custom
           sed -i "s/__PASSWORD__/$WRT_WORD/g" ./files/etc/uci-defaults/99-custom
+          sed -i "s/__ROOT_PASSWORD__/$WRT_PW/g" ./files/etc/uci-defaults/99-custom
       
       - name: Generate configuration file
         run: |
@@ -127,13 +130,6 @@ jobs:
           cd openwrt
           make download -j16
       
-      - name: Patch Rust bootstrap for CI
-        run: |
-          cd openwrt
-
-          # ✅ 修复 rust 构建报错
-          sed -i 's/--set=llvm\.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' feeds/packages/lang/rust/Makefile
-          
       - name: Compile firmware
         run: |
           cd openwrt
