@@ -65,6 +65,10 @@ CONFIG_PACKAGE_luci-mod-dashboard=y
 CONFIG_PACKAGE_luci-mod-network=y
 CONFIG_PACKAGE_luci-mod-status=y
 CONFIG_PACKAGE_luci-mod-system=y
+
+CONFIG_PACKAGE_luci-app-attendedsysupgrade=n
+
+
 #工具
 CONFIG_PACKAGE_init-settings=y
 CONFIG_PACKAGE_bash=y
@@ -84,7 +88,10 @@ CONFIG_PACKAGE_luci-app-uhttpd=y
 CONFIG_PACKAGE_luci-app-upnp=y
 CONFIG_PACKAGE_luci-app-tailscale=y
 CONFIG_PACKAGE_luci-app-easytier=y
+CONFIG_PACKAGE_luci-app-argon-config=y
+CONFIG_PACKAGE_luci-app-aurora-config=y
 CONFIG_PACKAGE_luci-theme-argon=y
+CONFIG_PACKAGE_luci-theme-aurora=y
 CONFIG_PACKAGE_luci-proto-ipv6=y
 CONFIG_PACKAGE_luci-proto-ppp=y
 #磁盘管理
