@@ -115,6 +115,8 @@ jobs:
           sed -i "s/__SSID__/$WRT_SSID/g" ./files/etc/uci-defaults/99-custom
           sed -i "s/__PASSWORD__/$WRT_WORD/g" ./files/etc/uci-defaults/99-custom
           sed -i "s/__ROOT_PASSWORD__/$WRT_PW/g" ./files/etc/uci-defaults/99-custom
+          
+          $GITHUB_WORKSPACE/Scripts/Handles.sh
       
       - name: Generate configuration file
         run: |
