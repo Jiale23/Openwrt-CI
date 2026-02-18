@@ -42,7 +42,7 @@ if [ -f "$RUST_FILE" ]; then
 fi
 
 # 修复tailsscale安装冲突问题
-TS_FILE=$(find "$PKG_PATH" -maxdepth 3 -type f -wholename "*/tailscale/Makefile")
+TS_FILE=$(find ../feeds/packages/ -maxdepth 3 -type f -wholename "*/tailscale/Makefile")
 
 if [ -f "$TS_FILE" ]; then
     echo "Fixing tailscale Makefile..."
