@@ -41,30 +41,12 @@ if [ -f "$RUST_FILE" ]; then
 	cd $PKG_PATH && echo "rust has been fixed!"
 fi
 
-# 修复tailsscale安装冲突问题
+#修复TailScale配置文件冲突
 TS_FILE=$(find ../feeds/packages/ -maxdepth 3 -type f -wholename "*/tailscale/Makefile")
-
 if [ -f "$TS_FILE" ]; then
-    echo "Fixing tailscale Makefile..."
-    echo "File: $TS_FILE"
-    echo ""
-    
-    # 删除配置文件的安装行
-    sed -i '/etc\/config\/tailscale/d' "$TS_FILE"
-    
-    # 删除 init.d 脚本的安装行
-    sed -i '/etc\/init\.d\/tailscale/d' "$TS_FILE"
-    
-    # 可选：删除相关的 INSTALL_DIR 行（如果存在）
-    # sed -i '/\$(INSTALL_DIR).*\/etc\/config$/d' "$TS_FILE"
-    # sed -i '/\$(INSTALL_DIR).*\/etc\/init\.d$/d' "$TS_FILE"
-    
-    echo "tailscale Makefile has been fixed!"
-    echo ""
-    echo "已删除的冲突文件:"
-    echo "  - etc/config/tailscale"
-    echo "  - etc/init.d/tailscale"
-else
-    echo "ERROR: tailscale Makefile not found!"
-    exit 1
+	echo " "
+
+	sed -i '/\/files/d' $TS_FILE
+
+	cd $PKG_PATH && echo "tailscale has been fixed!"
 fi
