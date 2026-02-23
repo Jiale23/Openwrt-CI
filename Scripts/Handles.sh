@@ -44,9 +44,20 @@ fi
 #修复TailScale配置文件冲突
 TS_FILE=$(find ../feeds/packages/ -maxdepth 3 -type f -wholename "*/tailscale/Makefile")
 if [ -f "$TS_FILE" ]; then
-	echo " "
+    echo "Tailscale 修复补丁正在应用: $TS_FILE"
 
-	sed -i '/\/files/d' $TS_FILE
+    # 1. 删除 Makefile 中的 conffiles 定义段落 (防止包管理器标记文件归属)
+    # 匹配从 define Package/tailscale/conffiles 到 endef 的所有内容并删除
+    sed -i '/define Package\/tailscale\/conffiles/,/endef/d' "$TS_FILE"
 
-	cd $PKG_PATH && echo "tailscale has been fixed!"
+    # 2. 删除具体的安装指令行
+    # 针对你提供的双斜杠路径进行精准匹配删除
+    sed -i '/\/etc\/init.d\/tailscale/d' "$TS_FILE"
+    sed -i '/\/etc\/config\/tailscale/d' "$TS_FILE"
+
+    # 3. 修正目录创建指令
+    # 原本会创建 /etc/init.d 和 /etc/config，现在只保留 /usr/sbin
+    sed -i 's/\$(INSTALL_DIR) \$(1)\/usr\/sbin \$(1)\/etc\/init.d \$(1)\/etc\/config/\$(INSTALL_DIR) \$(1)\/usr\/sbin/g' "$TS_FILE"
+
+    echo "Tailscale 修复完成！"
 fi
