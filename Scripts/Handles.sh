@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PKG_PATH="$GITHUB_WORKSPACE/wrt/package/"
+PKG_PATH="$GITHUB_WORKSPACE/openwrt/package/"
 
 #修改argon主题字体和颜色
 if [ -d *"luci-theme-argon"* ]; then
