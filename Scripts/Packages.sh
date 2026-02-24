@@ -67,7 +67,7 @@ UPDATE_PACKAGE "luci-app-ddns-go" "sirpdboy/luci-app-ddns-go" "main"
 UPDATE_PACKAGE "luci-app-poweroffdevice" "sirpdboy/luci-app-poweroffdevice" "main"
 UPDATE_PACKAGE "luci-app-tailscale" "asvow/luci-app-tailscale" "main"
 UPDATE_PACKAGE "luci-app-easytier" "EasyTier/luci-app-easytier" "main"
-UPDATE_PACKAGE "luci-app-easytier" "EasyTier/luci-app-easytier" "main"
+UPDATE_PACKAGE "luci-app-5GSmartCase" "LeeHe-gif/luci-app-5GSmartCase" "main"
 
 #更新软件包版本
 UPDATE_VERSION() {
