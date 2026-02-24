@@ -68,7 +68,6 @@ CONFIG_PACKAGE_luci-mod-system=y
 
 CONFIG_PACKAGE_luci-app-attendedsysupgrade=n
 
-
 #工具
 CONFIG_PACKAGE_init-settings=y
 CONFIG_PACKAGE_bash=y
