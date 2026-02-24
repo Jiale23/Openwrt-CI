@@ -58,11 +58,8 @@ env:
   WRT_TEST: ${{inputs.WRT_TEST}}
 
 jobs:
-
   build_openwrt:
-
-    name: Build OpenWrt Firmware
-
+    name: Build OpenWrt Firmware #编译OpenWrt固件
     runs-on: ubuntu-22.04
 
     steps:
@@ -93,13 +90,17 @@ jobs:
         run: |
           git clone --single-branch --branch $WRT_BRANCH $WRT_REPO ./openwrt/
 
-      - name: Update feeds
+      - name: Initialize Variables #初始化变量
+        run: |
+          echo "WRT_DATE=$(TZ=UTC-8 date +"%y.%m.%d-%H.%M.%S")" >> $GITHUB_ENV
+
+      - name: Update feeds #更新feeds
         run: |
           cd openwrt
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
-      - name: Custom Packages
+      - name: Custom Packages #自定义包&处理文件
         run: | #临时方案 更换大分区DTS
 
           rm openwrt/target/linux/mediatek/dts/mt7981b-cudy-tr3000-v1.dts
@@ -118,7 +119,7 @@ jobs:
           sed -i "s/__PASSWORD__/$WRT_WORD/g" ./files/etc/uci-defaults/99-custom
           sed -i "s/__ROOT_PASSWORD__/$WRT_PW/g" ./files/etc/uci-defaults/99-custom
 
-      - name: Generate configuration file
+      - name: Generate configuration file #生成配置文件
         run: |
           cd openwrt
           
@@ -127,12 +128,12 @@ jobs:
           $GITHUB_WORKSPACE/Scripts/Settings.sh
           make defconfig -j$(nproc)
           
-      - name: Download packages
+      - name: Download packages #下载软件包
         run: |
           cd openwrt
           make download -j16
       
-      - name: Compile firmware
+      - name: Compile firmware #编译固件
         run: |
           cd openwrt
 
@@ -146,7 +147,7 @@ jobs:
           du -h --max-depth=1 ./build_dir
           du -h --max-depth=1 ./bin
 
-      - name: Prepare artifact
+      - name: Prepare artifact #准备产物
         run: |
           cd openwrt
           mkdir -p ./artifact/package ./artifact/buildinfo
