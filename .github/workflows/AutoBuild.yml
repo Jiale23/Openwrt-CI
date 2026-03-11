@@ -27,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        CONFIG: [X86_64,MediaTek] #编译配置文件列表
+        CONFIG: [X86_64,MediaTek_MT798X] #编译配置文件列表
         SOURCE: [immortalwrt/immortalwrt] #
         BRANCH: [openwrt-25.12] #25.12分支
 
