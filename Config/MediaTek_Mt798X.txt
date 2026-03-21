@@ -1,0 +1,8 @@
+#平台架构
+CONFIG_TARGET_mediatek=y
+CONFIG_TARGET_mediatek_filogic=y
+CONFIG_TARGET_mediatek_filogic_DEVICE_cudy_tr3000-v1=y
+
+CONFIG_TARGET_ROOTFS_INITRAMFS=n
+
+#
