@@ -52,7 +52,7 @@ if [ -d "$GITHUB_WORKSPACE/openwrt" ]; then
     echo " "
     CURRENT_PLATFORM="${WRT_CONFIG:-Unknown}"
     SFE_PARAM=""
-    [[ ! "$CURRENT_PLATFORM" =~ (IPQ|MT798|MTK|qualcomm) ]] && SFE_PARAM="--no-sfe"
+    [[ ! "$CURRENT_PLATFORM" =~ (IPQ|Mt798|MTK|Qualcomm|Ramips) ]] && SFE_PARAM="--no-sfe"
 
     cd "$GITHUB_WORKSPACE/openwrt"
     curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh
