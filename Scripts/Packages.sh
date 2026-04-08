@@ -62,7 +62,7 @@ UPDATE_PACKAGE "aurora-config" "eamonxg/luci-app-aurora-config" "master"
 
 UPDATE_PACKAGE "luci-app-openclash" "vernesong/OpenClash" "master"
 
-UPDATE_PACKAGE "openwrt-fastfetch" "ntbowen/openwrt-fastfetch" "master"
+UPDATE_PACKAGE "fastfetch-openwrt" "ntbowen/fastfetch-openwrt" "main"
 UPDATE_PACKAGE "luci-app-ddns-go" "sirpdboy/luci-app-ddns-go" "main"
 UPDATE_PACKAGE "luci-app-poweroffdevice" "sirpdboy/luci-app-poweroffdevice" "main"
 UPDATE_PACKAGE "luci-app-tailscale" "asvow/luci-app-tailscale" "main"
