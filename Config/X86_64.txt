@@ -13,8 +13,8 @@ CONFIG_TARGET_ROOTFS_EXT4FS=n
 CONFIG_TARGET_ROOTFS_TARGZ=n
 CONFIG_TARGET_ROOTFS_JFFS2=n
 #插件调整
-CONFIG_PACKAGE_kmod-iwlwifi=y
-CONFIG_PACKAGE_firmware-iwlwifi=y
+#CONFIG_PACKAGE_kmod-iwlwifi=y
+#CONFIG_PACKAGE_firmware-iwlwifi=y
 #wifi驱动
 CONFIG_PACKAGE_luci-app-snmpd=y
 CONFIG_PACKAGE_snmpd-ssl=y
