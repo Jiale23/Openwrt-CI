@@ -45,6 +45,8 @@ permissions: write-all
 
 env:
   GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  BUILD_JOBS: 2
+  DOWNLOAD_JOBS: 4
   WRT_CONFIG: ${{inputs.WRT_CONFIG}}
   WRT_THEME: ${{inputs.WRT_THEME}}
   WRT_NAME: ${{inputs.WRT_NAME}}
@@ -71,10 +73,7 @@ jobs:
           DEBIAN_FRONTEND: noninteractive
         run: |
           sudo -E apt update
-          sudo -E apt -y full-upgrade
           sudo -E apt install -y ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache clang cmake cpio curl device-tree-compiler flex gawk gcc-multilib g++-multilib gettext genisoimage git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libfuse-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libpython3-dev libreadline-dev libssl-dev libtool llvm lrzsz msmtp ninja-build p7zip p7zip-full patch pkgconf python3 python3-pyelftools python3-setuptools python3-dev python3-pip qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
-          sudo -E systemctl daemon-reload
-          sudo -E apt -y autoremove --purge
           sudo -E apt clean
           sudo -E timedatectl set-timezone "Asia/Shanghai"
           
@@ -124,18 +123,18 @@ jobs:
           cat $GITHUB_WORKSPACE/Config/$WRT_CONFIG.txt $GITHUB_WORKSPACE/Config/General.txt >> .config
           
           $GITHUB_WORKSPACE/Scripts/Settings.sh
-          make defconfig -j$(nproc)
+          make defconfig
           
       - name: Download packages #下载软件包
         run: |
           cd openwrt
-          make download -j16
+          make download -j${DOWNLOAD_JOBS}
       
       - name: Compile firmware #编译固件
         run: |
           cd openwrt
 
-          make -j$(nproc) || make -j1 V=s
+          make -j${BUILD_JOBS} V=s
           echo "======================="
           echo "Space usage:"
           echo "======================="
